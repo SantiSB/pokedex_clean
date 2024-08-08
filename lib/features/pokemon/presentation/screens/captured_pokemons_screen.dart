@@ -24,23 +24,19 @@ class CapturedPokemonsScreen extends StatelessWidget {
       body: BlocBuilder<SearchPokemonBloc, SearchPokemonState>(
         builder: (context, state) {
           if (state is SearchPokemonList) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  // Muestra una lista horizontal de tarjetas de Pokémons capturados
-                  SizedBox(
-                    height: 150,
-                    child: ListView(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      children: state.pokemons
-                          .map((p) => PokemonCard(pokemon: p))
-                          .toList(),
-                    ),
-                  ),
-                ],
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, // Número de columnas en el grid
+                  childAspectRatio: 3 / 2, // Proporción ancho/alto de los ítems
+                  crossAxisSpacing: 8, // Espacio horizontal entre ítems
+                  mainAxisSpacing: 8, // Espacio vertical entre ítems
+                ),
+                itemCount: state.pokemons.length,
+                itemBuilder: (context, index) {
+                  return PokemonCard(pokemon: state.pokemons[index]);
+                },
               ),
             );
           } else if (state is SearchPokemonLoading) {
