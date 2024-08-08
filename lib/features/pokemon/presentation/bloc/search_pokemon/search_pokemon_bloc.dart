@@ -9,25 +9,16 @@ import 'package:pokedex_clean/features/pokemon/domain/use_cases/search_pokemon.d
 part 'search_pokemon_event.dart';
 part 'search_pokemon_state.dart';
 
-// BloC para la búsqueda de Pokémons.
-// Gestiona los eventos relacionados con la búsqueda, captura y obtención de Pokémons capturados.
 class SearchPokemonBloc extends Bloc<SearchPokemonEvent, SearchPokemonState> {
-  // Caso de uso para capturar un Pokémon.
   final CapturePokemonUseCase _capturePokemonUseCase;
-
-  // Caso de uso para obtener la lista de Pokémons capturados.
   final GetCapturedPokemonsUseCase _getCapturedPokemonsUseCase;
-
-  // Caso de uso para buscar un Pokémon.
   final SearchPokemonUseCase _searchPokemonUseCase;
 
-  // Constructor que inicializa los casos de uso y el estado inicial.
   SearchPokemonBloc(
     this._capturePokemonUseCase,
     this._getCapturedPokemonsUseCase,
     this._searchPokemonUseCase,
   ) : super(SearchPokemonInitial()) {
-    // Maneja el evento de búsqueda de un Pokémon.
     on<OnSearchPokemon>((event, emit) async {
       emit(SearchPokemonLoading());
 
@@ -39,7 +30,6 @@ class SearchPokemonBloc extends Bloc<SearchPokemonEvent, SearchPokemonState> {
       );
     });
 
-    // Maneja el evento de captura de un Pokémon.
     on<OnCapturePokemon>((event, emit) async {
       final resp = await _capturePokemonUseCase(event.pokemon);
 
@@ -49,19 +39,21 @@ class SearchPokemonBloc extends Bloc<SearchPokemonEvent, SearchPokemonState> {
       );
     });
 
-    // Maneja el evento de obtención de la lista de Pokémons capturados.
     on<OnGetCapturedPokemons>((event, emit) async {
+      emit(SearchPokemonLoading()); // Emitir el estado de carga
+
       final resp = await _getCapturedPokemonsUseCase();
 
       resp.fold(
         (f) => emit(SearchPokemonFailure(failure: f)),
-        (ps) => emit(SearchPokemonList(pokemons: ps.cast<Pokemon>())),
+        (ps) {
+          if (ps.isEmpty) {
+            emit(SearchPokemonList(pokemons: []));
+          } else {
+            emit(SearchPokemonList(pokemons: ps.cast<Pokemon>()));
+          }
+        },
       );
     });
   }
 }
-
-// Un bloc es un componente de Flutter que se encarga de manejar la lógica de negocio de la aplicación.
-// En este caso, el bloc SearchPokemonBloc se encarga de manejar la lógica de búsqueda, captura y obtención de Pokémons.
-// Para ello, se apoya en los casos de uso CapturePokemonUseCase, GetCapturedPokemonsUseCase y SearchPokemonUseCase.
-// El bloc SearchPokemonBloc se compone de eventos y estados, que se encargan de gestionar las acciones y el estado de la aplicación.
