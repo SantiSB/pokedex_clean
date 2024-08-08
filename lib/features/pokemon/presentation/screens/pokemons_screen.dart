@@ -48,56 +48,67 @@ class PokemonsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     // Botón para generar un Pokémon aleatorio
-                    TextButton(
+                    ElevatedButton(
                         onPressed: () =>
                             BlocProvider.of<SearchPokemonBloc>(context)
                                 .add(OnSearchPokemon()),
+                        style: ElevatedButton.styleFrom(),
                         child: const Text('Generar pokemon aleatorio')),
                   ],
                 ),
               );
 
-            // Estado de éxito: muestra el Pokémon encontrado y opciones adicionales
+            // Estado de éxito: muestra el Pokémon y los botones para capturar y generar otro Pokémon
             case SearchPokemonSuccess():
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    // Muestra la tarjeta del Pokémon encontrado
+                    // Pokémon card
                     PokemonCard(pokemon: state.pokemon),
-                    // Botón para generar otro Pokémon aleatorio
-                    TextButton(
-                        onPressed: () =>
-                            BlocProvider.of<SearchPokemonBloc>(context)
-                                .add(OnSearchPokemon()),
-                        child: const Text('Generar otro pokemon aleatorio')),
 
-                    // Botón para capturar el Pokémon encontrado
-                    TextButton(
+                    const SizedBox(height: 20),
+
+                    // Botón para capturar Pokémon
+                    FilledButton(
                         onPressed: () =>
                             BlocProvider.of<SearchPokemonBloc>(context)
                                 .add(OnCapturePokemon(pokemon: state.pokemon)),
-                        child: Text('Capturar a ${state.pokemon.name}'))
+                        style: FilledButton.styleFrom(),
+                        child: Text('Capturar a ${state.pokemon.name}')),
+
+                    const SizedBox(height: 20),
+
+                    // Botón para generar otro Pokémon
+                    OutlinedButton(
+                        onPressed: () =>
+                            BlocProvider.of<SearchPokemonBloc>(context)
+                                .add(OnSearchPokemon()),
+                        style: OutlinedButton.styleFrom(),
+                        child: const Text('Generar otro Pokemon')),
                   ],
                 ),
               );
 
-            // Estado de fallo: muestra un mensaje de error y opción para reintentar
+            // Estado de fallo: muestra un mensaje de error y el boton para volver a generar un nuevo Pokémon
             case SearchPokemonFailure():
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
-                        'Ha ocurrido un error, ¿qué te parece si lo intentamos de nuevo?'),
-                    // Botón para volver y generar un nuevo Pokémon
-                    TextButton(
+                    const Text('Ha ocurrido un error'),
+
+                    const SizedBox(height: 20),
+
+                    // Botón para volver a generar un nuevo Pokémon
+                    ElevatedButton(
                         onPressed: () =>
                             BlocProvider.of<SearchPokemonBloc>(context)
                                 .add(OnSearchPokemon()),
-                        child: const Text('Volver y generar pokemon'))
+                        style: ElevatedButton.styleFrom(),
+                        child: const Text('Volver a generar pokemon'))
                   ],
                 ),
               );

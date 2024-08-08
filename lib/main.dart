@@ -5,6 +5,7 @@ import 'package:pokedex_clean/di.dart';
 import 'package:pokedex_clean/features/pokemon/presentation/bloc/search_pokemon/search_pokemon_bloc.dart';
 import 'package:pokedex_clean/features/pokemon/presentation/screens/captured_pokemons_screen.dart';
 import 'package:pokedex_clean/features/pokemon/presentation/screens/pokemons_screen.dart';
+import 'package:pokedex_clean/features/pokemon/presentation/theme/pokemon_theme.dart';
 
 void main() async {
   await init();
@@ -22,10 +23,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Pokemon APP',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
+        theme: pokemonTheme,
         home: const PokemonsScreen(),
         routes: {
           '/captured': (context) => const CapturedPokemonsScreen(),
