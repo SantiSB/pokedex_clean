@@ -18,10 +18,11 @@ class PokemonsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Pokedex'),
         backgroundColor: Theme.of(context).colorScheme.secondary,
+        foregroundColor: Colors.white,
         actions: [
           // Botón para ver los Pokémons capturados
           IconButton(
-            icon: const Icon(Icons.favorite),
+            icon: const Icon(Icons.catching_pokemon),
             onPressed: () {
               BlocProvider.of<SearchPokemonBloc>(context)
                   .add(OnGetCapturedPokemons());

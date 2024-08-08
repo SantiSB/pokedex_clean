@@ -12,6 +12,7 @@ class CapturedPokemonsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Captured Pokemons'),
         backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
