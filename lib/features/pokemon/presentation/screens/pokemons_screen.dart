@@ -17,6 +17,7 @@ class PokemonsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pokedex'),
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         actions: [
           // Botón para ver los Pokémons capturados
           IconButton(

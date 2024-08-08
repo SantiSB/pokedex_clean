@@ -11,37 +11,59 @@ class PokemonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
-      ),
-      elevation: 5,
-      shadowColor: Colors.grey.withOpacity(0.5),
-      child: Column(
-        children: [
-          // Imagen del Pokémon.
-          ClipRRect(
-            borderRadius: const BorderRadius.vertical(
-              top: Radius.circular(15.0),
-            ),
-            child: Image.network(
-              pokemon.image,
-              height: 100,
-              fit: BoxFit.cover,
-            ),
+    final theme = Theme.of(context);
+
+    return Center(
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        elevation: 5,
+        shadowColor: Colors.grey.withOpacity(0.5),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+                color: theme.colorScheme.secondary,
+                width: 2), // Usa el color secondary
+            borderRadius: BorderRadius.circular(15.0),
           ),
-          Padding(
-            padding: const EdgeInsets.all(1.0),
-            child: Text(
-              pokemon.name,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.bold,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Contenedor para manejar el tamaño y ajuste de la imagen
+              ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(15.0),
+                ),
+                child: Container(
+                  height: 200,
+                  width: 300, // Ajustar el ancho del card
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(pokemon.image),
+                      fit: BoxFit
+                          .contain, // Ajusta la imagen para que no se corte ni se pixele
+                    ),
+                  ),
+                ),
               ),
-            ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(
+                    16.0, 8.0, 16.0, 16.0), // Reduce el padding superior
+                child: Text(
+                  pokemon.name,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: theme.colorScheme.secondary,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

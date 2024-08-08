@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex_clean/features/pokemon/presentation/bloc/search_pokemon/search_pokemon_bloc.dart';
-import 'package:pokedex_clean/features/pokemon/presentation/widgets/pokemon_card.dart';
+import 'package:pokedex_clean/features/pokemon/presentation/widgets/pokemon_grid_card.dart';
 
 class CapturedPokemonsScreen extends StatelessWidget {
   const CapturedPokemonsScreen({super.key});
@@ -11,6 +11,7 @@ class CapturedPokemonsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Captured Pokemons'),
+        backgroundColor: Theme.of(context).colorScheme.primary,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -35,7 +36,7 @@ class CapturedPokemonsScreen extends StatelessWidget {
                 ),
                 itemCount: state.pokemons.length,
                 itemBuilder: (context, index) {
-                  return PokemonCard(pokemon: state.pokemons[index]);
+                  return PokemonGridCard(pokemon: state.pokemons[index]);
                 },
               ),
             );

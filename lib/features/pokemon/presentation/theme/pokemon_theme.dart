@@ -3,32 +3,28 @@ import 'pokemon_theme_colors.dart';
 
 final ThemeData pokemonTheme = ThemeData(
   colorScheme: ColorScheme(
-    primary: PokemonThemeColors.pokeballRed,
-    primaryContainer: PokemonThemeColors.pokeballRed.withOpacity(0.7),
-    secondary: PokemonThemeColors.pokemonYellow,
-    secondaryContainer: PokemonThemeColors.pokemonYellow.withOpacity(0.7),
-    surface: PokemonThemeColors.pokeballWhite,
+    primary: PokemonThemeColors.pokemonRed,
+    primaryContainer: PokemonThemeColors.pokemonRed.withOpacity(0.7),
+    secondary: PokemonThemeColors.pokemonBlue,
+    secondaryContainer: PokemonThemeColors.pokemonBlue.withOpacity(0.7),
+    surface: PokemonThemeColors.pokemonWhite,
     error: Colors.red,
-    onPrimary: PokemonThemeColors.pokeballWhite,
-    onSecondary: PokemonThemeColors.pokeballBlack,
-    onSurface: PokemonThemeColors.pokeballBlack,
-    onError: PokemonThemeColors.pokeballWhite,
+    onPrimary: PokemonThemeColors.pokemonWhite,
+    onSecondary: PokemonThemeColors.pokemonBlack,
+    onSurface: PokemonThemeColors.pokemonBlack,
+    onError: PokemonThemeColors.pokemonWhite,
     brightness: Brightness.light,
   ),
-  scaffoldBackgroundColor: PokemonThemeColors.pokeballWhite,
-  appBarTheme: const AppBarTheme(
-    backgroundColor: PokemonThemeColors.pokeballRed,
-    foregroundColor: PokemonThemeColors.pokeballWhite,
-  ),
+  scaffoldBackgroundColor: PokemonThemeColors.pokemonWhite,
   textTheme: const TextTheme(
-    bodyLarge: TextStyle(color: PokemonThemeColors.pokeballBlack),
-    bodyMedium: TextStyle(color: PokemonThemeColors.tvGray),
+    bodyLarge: TextStyle(color: PokemonThemeColors.pokemonBlack),
+    bodyMedium: TextStyle(color: PokemonThemeColors.pokemonGray),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: PokemonThemeColors.tvBlue,
-      foregroundColor: PokemonThemeColors.pokeballWhite,
-      shadowColor: PokemonThemeColors.pokeballBlack,
+      backgroundColor: PokemonThemeColors.pokemonBlue,
+      foregroundColor: PokemonThemeColors.pokemonWhite,
+      shadowColor: PokemonThemeColors.pokemonBlack,
       textStyle: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.bold,
@@ -41,13 +37,13 @@ final ThemeData pokemonTheme = ThemeData(
   ),
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
-      foregroundColor: PokemonThemeColors.tvBlue,
+      foregroundColor: PokemonThemeColors.pokemonBlue,
       textStyle: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.bold,
       ),
       side: const BorderSide(
-        color: PokemonThemeColors.tvBlue,
+        color: PokemonThemeColors.pokemonBlue,
         width: 2,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
@@ -55,9 +51,9 @@ final ThemeData pokemonTheme = ThemeData(
   ),
   filledButtonTheme: FilledButtonThemeData(
     style: FilledButton.styleFrom(
-      backgroundColor: PokemonThemeColors.tvBlue,
-      foregroundColor: PokemonThemeColors.pokeballWhite,
-      shadowColor: PokemonThemeColors.pokeballBlack,
+      backgroundColor: PokemonThemeColors.pokemonBlue,
+      foregroundColor: PokemonThemeColors.pokemonWhite,
+      shadowColor: PokemonThemeColors.pokemonBlack,
       textStyle: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.bold,
