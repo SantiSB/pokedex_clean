@@ -7,7 +7,7 @@ import 'package:pokedex_clean/features/pokemon/presentation/widgets/pokemon_card
 /// Utiliza el patrón Bloc para manejar los estados y eventos relacionados con la búsqueda, captura y visualización de Pokémons.
 // StatelessWidget: un widget que no mantiene estado.
 class PokemonsScreen extends StatelessWidget {
-   // Constructor de la clase PokemonsScreen.
+  // Constructor de la clase PokemonsScreen.
   const PokemonsScreen({super.key});
 
   @override
@@ -15,6 +15,21 @@ class PokemonsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Scaffold: un widget de Material que implementa la estructura visual básica de una pantalla.
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Pokedex'),
+        actions: [
+          // Botón para ver los Pokémons capturados
+          IconButton(
+            icon: const Icon(Icons.favorite),
+            onPressed: () {
+              BlocProvider.of<SearchPokemonBloc>(context)
+                  .add(OnGetCapturedPokemons());
+              // Navega a la pantalla de Pokémons capturados
+              Navigator.pushNamed(context, '/captured');
+            },
+          ),
+        ],
+      ),
       // Barra superior de la pantalla.
       body: BlocBuilder<SearchPokemonBloc, SearchPokemonState>(
         // BlocBuilder: un widget que escucha los cambios en un Bloc y reconstruye el widget en función del nuevo estado.
@@ -38,12 +53,6 @@ class PokemonsScreen extends StatelessWidget {
                             BlocProvider.of<SearchPokemonBloc>(context)
                                 .add(OnSearchPokemon()),
                         child: const Text('Generar pokemon aleatorio')),
-                    // Botón para ver los Pokémons capturados
-                    TextButton(
-                        onPressed: () =>
-                            BlocProvider.of<SearchPokemonBloc>(context)
-                                .add(OnGetCapturedPokemons()),
-                        child: const Text('Ver mis pokemones capturados'))
                   ],
                 ),
               );
@@ -63,46 +72,13 @@ class PokemonsScreen extends StatelessWidget {
                             BlocProvider.of<SearchPokemonBloc>(context)
                                 .add(OnSearchPokemon()),
                         child: const Text('Generar otro pokemon aleatorio')),
-                    // Botón para ver los Pokémons capturados
-                    TextButton(
-                        onPressed: () =>
-                            BlocProvider.of<SearchPokemonBloc>(context)
-                                .add(OnGetCapturedPokemons()),
-                        child: const Text('Ver mis pokemones capturados')),
+
                     // Botón para capturar el Pokémon encontrado
                     TextButton(
                         onPressed: () =>
                             BlocProvider.of<SearchPokemonBloc>(context)
                                 .add(OnCapturePokemon(pokemon: state.pokemon)),
                         child: Text('Capturar a ${state.pokemon.name}'))
-                  ],
-                ),
-              );
-
-            // Estado de lista de Pokémons capturados: muestra la lista de Pokémons
-            case SearchPokemonList():
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    // Muestra una lista horizontal de tarjetas de Pokémons capturados
-                    SizedBox(
-                      height: 150,
-                      child: ListView(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        children: state.pokemons
-                            .map((p) => PokemonCard(pokemon: p))
-                            .toList(),
-                      ),
-                    ),
-                    // Botón para volver y generar un nuevo Pokémon
-                    TextButton(
-                        onPressed: () =>
-                            BlocProvider.of<SearchPokemonBloc>(context)
-                                .add(OnSearchPokemon()),
-                        child: const Text('Volver y generar pokemon')),
                   ],
                 ),
               );
@@ -124,6 +100,12 @@ class PokemonsScreen extends StatelessWidget {
                         child: const Text('Volver y generar pokemon'))
                   ],
                 ),
+              );
+
+            // Estado default: muestra un mensaje de error
+            default:
+              return const Center(
+                child: Text('Ha ocurrido un error inesperado'),
               );
           }
         },

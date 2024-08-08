@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pokedex_clean/di.dart';
 import 'package:pokedex_clean/features/pokemon/presentation/bloc/search_pokemon/search_pokemon_bloc.dart';
+import 'package:pokedex_clean/features/pokemon/presentation/screens/captured_pokemons_screen.dart';
 import 'package:pokedex_clean/features/pokemon/presentation/screens/pokemons_screen.dart';
 
 void main() async {
@@ -27,6 +27,9 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         home: const PokemonsScreen(),
+        routes: {
+          '/captured': (context) => const CapturedPokemonsScreen(),
+        },
       ),
     );
   }
