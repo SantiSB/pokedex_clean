@@ -8,10 +8,11 @@ import 'package:pokedex_clean/features/pokemon/presentation/screens/pokemons_scr
 import 'package:pokedex_clean/features/pokemon/presentation/theme/pokemon_theme.dart';
 
 void main() async {
-  await init();
-  runApp(const MyApp());
+  await init(); // Inicializa las dependencias antes de arrancar la app
+  runApp(const MyApp()); // Arranca la app utilizando MyApp como widget raíz
 }
 
+// Widget principal de la aplicación
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        // Registra el Bloc que manejará la lógica de búsqueda de Pokémons
         BlocProvider(create: (_) => GetIt.instance.get<SearchPokemonBloc>())
       ],
       child: MaterialApp(
@@ -26,7 +28,8 @@ class MyApp extends StatelessWidget {
         theme: pokemonTheme,
         home: const PokemonsScreen(),
         routes: {
-          '/captured': (context) => const CapturedPokemonsScreen(),
+          '/captured': (context) =>
+              const CapturedPokemonsScreen(),
         },
       ),
     );
